@@ -1,0 +1,26 @@
+{
+  "name": "twilio-bench",
+  "version": "1.0.0",
+  "description": "Performance testing of Twilio functions",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twilio",
+    "twilio-taskrouter"
+  ],
+  "author": "Bob Rundle",
+  "license": "MIT",
+  "dependencies": {
+    "@twilio/voice-sdk": "^2.11.0",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jquery": "^3.7.1",
+    "popper.js": "^1.16.1",
+    "twilio": "^5.0.4"
+  }
+}

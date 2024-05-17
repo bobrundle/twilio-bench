@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="BootstrapBench.png">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <title>Twilio Task Router Bench</title>
+</head>
+
+<body>
+    <div class="container-fluid p-5 m-5">
+        <div class="row d-flex justify-content-center align-items-center m-5">
+            <div class="col-3">
+                <button type="button" class="btn btn-primary connect-worker w-100" id="connect-alice" data-worker-name="alice">Connect Alice</button>
+                <div class="worker-status overflow-auto" style="max-height: 200px;"></div>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary connect-worker w-100" id="connect-bob" data-worker-name="bob">Connect Bob</button>
+                <div class="worker-status overflow-auto" style="max-height: 200px;"></div>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary connect-worker w-100" id="connect-bob" data-worker-name="carol">Connect Carol</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-primary connect-worker w-100" id="connect-dan" data-worker-name="dan">Connect Dan</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center m-5">
+            <div class="col-4">
+                <button type="button" class="btn btn-primary connect-workspace w-100" id="connect-workspace">Connect Workspace</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-primary create-task w-100" id="create-task">Create Task</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center m-5">
+            <div class="col-6">
+                <button type="button" class="btn btn-primary list-tasks w-100">List Tasks</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-primary list-reservations w-100">List Reservations</button>
+                <div class="status-message overflow-auto" style="max-height: 200px;"></div>
+            </div>
+        </div>
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/node_modules/@twilio/voice-sdk/dist/twilio.min.js"></script>
+        <script src="https://sdk.twilio.com/js/taskrouter/releases/1.24.3/taskrouter.min.js" integrity="sha384-L4AyvsIag1tEQQSlXJPvO+RHFQl/WaRqKbNIK/VJXPCK/xqu2hF00lP2KsbfVgeV" crossorigin="anonymous"></script>
+        <script src="twilio-taskrouter-bench.js"></script>
+    </body>
+</html>
