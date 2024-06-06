@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="BootstrapBench.png">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Twilio Task Router Bench</title>
+</head>
+
+<body>
+    <div class="container-fluid p-5 m-5">
+        <div class="row">
+            <div class="col-12">
+                <h1>Twilio Chat Bench</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Queue Target:</span>
+                    <select class="form-select" id="queue-target">
+                        <option value="">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Frequency (#/min)</span>
+                    <input type="text" class="form-control" id="frequency" value="6">
+                </div>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-primary" id="start">Start</button>
+                <button class="btn btn-danger" id="stop" disabled>Stop</button>
+            </div>
+            <div class="col-12 chat-operation-status status-scroll" id="chat-operation-status">
+
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center m-5">
+            <div class="col-3">
+                <h5>Customer Enable</h5>
+            </div>
+            <div class="col-3">
+                <h5>Text Message Base</h5>
+            </div>
+            <div class="col-6">
+                <h5>Text Status</h5>
+            </div>
+        </div>
+        <div class="sender-list" id="sender-list">
+
+        </div>
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="/node_modules/@twilio/voice-sdk/dist/twilio.min.js"></script>
+        <script src="https://sdk.twilio.com/js/taskrouter/releases/1.24.3/taskrouter.min.js" integrity="sha384-L4AyvsIag1tEQQSlXJPvO+RHFQl/WaRqKbNIK/VJXPCK/xqu2hF00lP2KsbfVgeV" crossorigin="anonymous"></script>
+        <script src="twilio-taskrouter-bench.js"></script>
+    </div>
+    <div class="templates" style="display: none;">
+        <div id="sender-list-entry">
+            <div class="row sender-list-entry" data-customer-phone-number="" data-customer-name="">
+                <div class="col-3">
+                    <div class="form-check">
+                        <input class="form-check-input customer-enable" type="checkbox">
+                        <label class="form-check-label customer-name"></label>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <input class="form-input text-content" value="Hello">
+                </div>
+                <div class="col-6">
+                    <div class="sender-status status-scroll">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/node_modules/@twilio/voice-sdk/dist/twilio.min.js"></script>
+    <script src="https://sdk.twilio.com/js/taskrouter/releases/1.24.3/taskrouter.min.js" integrity="sha384-L4AyvsIag1tEQQSlXJPvO+RHFQl/WaRqKbNIK/VJXPCK/xqu2hF00lP2KsbfVgeV" crossorigin="anonymous"></script>
+    <script src="twilio-chat-bench.js"></script>
+</body>
+</html>

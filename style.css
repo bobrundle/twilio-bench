@@ -1,0 +1,5 @@
+.status-scroll {
+    max-height: 30rem;
+    overflow-y: scroll;
+}
+

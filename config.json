@@ -1,0 +1,31 @@
+{
+    "customers": [
+        {"name": "andy", "phoneNumber": "+15054483953", "message": "Hello from Andy", "enable": true},
+        {"name": "bill", "phoneNumber": "+15054487261", "message": "Hello from Bill", "enable": true},
+        {"name": "carla", "phoneNumber":"+15054487243", "message": "Hello from Carla", "enable": true},
+        {"name": "debby", "phoneNumber": "+15054487988", "message": "Hello from Debbie", "enable": true},
+        {"name": "ed", "phoneNumber": "+15054483152", "message": "Hello from Ed", "enable": true},
+        {"name": "frank", "phoneNumber": "+16503790687", "message": "Hello from Frank", "enable": true},
+        {"name": "gina", "phoneNumber": "+16503790255", "message": "Hello from Gina", "enable": true},
+        {"name": "hank", "phoneNumber": "+16507184795", "message": "Hello from Hank", "enable": true},
+        {"name": "ian", "phoneNumber": "+16503790575", "message": "Hello from Ian", "enable": true},
+        {"name": "jill", "phoneNumber": "+16505635276", "message": "Hello from Jill", "enable": true}
+    ],
+    "queues": [
+        {"name": "Phoenix CC (Dev)", "phoneNumber": "+16024974145"},
+        {"name": "Las Vegas CC (Dev)", "phoneNumber": "+7257264393"},
+        {"name": "Denver CC (Dev)", "phoneNumber": "+17027064804"},
+        {"name": "Phoenix CC (Staging)", "phoneNumber": "+16027865301"},
+        {"name": "Las Vegas CC (Staging)", "phoneNumber": "+7252276563"},
+        {"name": "Denver CC (Staging)", "phoneNumber": "+17203169803"},
+        {"name": "Phoenix CC (Prod)", "phoneNumber": "+16232997054"},
+        {"name": "Las Vegas CC (Prod)", "phoneNumber": "+17025091512"},
+        {"name": "Denver CC (Prod)", "phoneNumber": "+17209028456"}
+    ],
+    "workers": [
+        {"name": "alice", "sid": "WK2a807708eda80a7acf2c3fe74654961e"},
+        {"name": "bob", "sid": "WKb1d6edf5e9818585235ad128c4f281b0"},
+        {"name": "carol", "sid": "WK7067258481427c817b3279457ad1afc5"},
+        {"name": "dan", "sid": "WK8998fad626468f452deae1230c447cb4"}
+    ]
+}
