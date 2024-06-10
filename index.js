@@ -6,6 +6,7 @@ var app = express();
 require('dotenv').config({path: __dirname + '/.env.local'});
 const taskrouter = require('twilio').jwt.taskrouter;
 const { AccessToken } = require('twilio').jwt;
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
 const twilio = require('twilio');
 const { TaskQueueCapability, WorkspaceCapability, WorkerCapability } = require('twilio').jwt.taskrouter;
 const util = taskrouter.util;
@@ -22,6 +23,7 @@ const authToken = process.env.TWILIO_TOKEN;
 const apiKeySid = process.env.TWILIO_API_KEY_SID;
 const apiKeySecret = process.env.TWILIO_API_KEY_SECRET;
 const workspaceSid = process.env.TWILIO_WORKSPACE_SID;
+const twimlAppSid = process.env.TWILIO_TWIML_APP_SID;
 
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/node_modules'));
@@ -71,6 +73,7 @@ app.post('/test-post', function(req, res) {
     res.json({message: 'success'});
 });
 var chatShowerTimer = null;
+var callShowerTimer = null;
 
 app.post('/chat/shower/start', function(req, res) {
     console.log(req.body);
@@ -95,12 +98,48 @@ app.post('/chat/shower/start', function(req, res) {
     }, 60000/frequency);
 });
 
+app.post('/call/shower/start', function(req, res) {
+    console.log(req.body);
+    let frequency = req.body.frequency;
+    if(isNaN(frequency) || frequency <= 0 || frequency >= 1000) {
+        res.json({error: 'Frequency must be greater than 0 and less than 1000'});
+        return;
+    }
+    let phoneNumber = req.body.phoneNumber;
+    if(phoneNumber === '') {
+        res.json({error: 'Please select a queue'});
+        return;
+    }
+    let customerList = req.body.customerList;
+    if(!Array.isArray(customerList) || customerList.length === 0) {
+        res.json({error: 'Please select at least one customer'});
+        return;
+    }
+    res.json({message: 'Starting chat shower, sending ' + frequency + ' messages/minute'});
+    callShower(phoneNumber, customerList);
+    callShowerTimer = setInterval(function() {
+        callShower(phoneNumber, customerList);
+    }, 3600000/frequency);
+});
+
 app.post('/chat/shower/stop', function(req, res) {
     clearInterval(chatShowerTimer);
     res.json({message: 'Chat shower stopped'});
 });
 
+app.post('/call/shower/stop', function(req, res) {
+    clearInterval(callShowerTimer);
+    res.json({message: 'Call shower stopped'});
+});
+
+app.get('/voice.xml', function(req, res) {
+    let toNumber = req.query.To;
+    let fromNumber = req.query.From;
+
+});
+
 var showerCount = 0;
+var callShowerCount = 0;
 
 var client = null;
 
@@ -120,6 +159,33 @@ async function chatShower(targetPhoneNumber, customerList) {
         });
     });
 }
+async function callShower(targetPhoneNumber, customerList) {
+    if(client === null) {
+        client = new twilio(accountSid, authToken);
+    }
+    callShowerCount++;
+    customerList.forEach(async function(customer) {
+        let message = customer.message + '. Count is ' + callShowerCount + '.';
+        const response = new VoiceResponse();
+        response.pause({
+            length: 30
+        });
+        for(let i = 0; i < 10; i++) {
+            response.say(message);
+            response.pause({
+                length: 10
+            });
+        }
+        response.say('Hanging up now.');
+        let call = await client.calls.create({
+            from: customer.phoneNumber,
+            to: targetPhoneNumber,
+            twiml: response.toString()
+        }).catch(function(err) {
+            console.log('error calling out', err);
+        });
+    });
+}
 
 app.get('/worker/list', function(req, res) {
     res.json(workers);
@@ -131,6 +197,20 @@ app.get('/customer/list', function(req, res) {
 
 app.get('/queue/list', function(req, res) {
     res.json(queues);
+});
+
+app.get('/customer/access-token', function(req, res) {
+    let customerName = req.query.customerName;
+    let token = new AccessToken(accountSid, apiKeySid, apiKeySecret, 
+        { ttl: 3600, 
+          identity: customerName
+        });
+    let grant = new VoiceGrant({
+        outgoingApplicationSid: twimlAppSid
+    });
+    token.addGrant(grant);
+    let jwt = token.toJwt();
+    res.json({jwt: jwt});
 });
 
 app.get('/worker/token', function(req, res) {
